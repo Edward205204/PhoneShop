@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - PhoneShop</title>
+    <link rel="stylesheet" href="../asset/css/styles.css" />
+    <style>
+      .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+        background: linear-gradient(to right, #4776e6, #8e54e9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .site-footer {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+        color: var(--light-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="main-nav">
+          <a href="../index.html" class="logo">PhoneShop</a>
+          <nav>
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../customer/customer.html" class="nav-link">Store</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <section class="admin-toolbar">
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-name"
+              class="search-input"
+              placeholder="Tìm kiếm theo tên"
+            />
+            <button class="btn btn-primary" onclick="searchProducts()">
+              Tìm
+            </button>
+          </div>
+          <div class="filter-box">
+            <select
+              id="filter-type"
+              class="filter-select"
+              onchange="filterProducts()"
+            >
+              <option value="all">Tất cả</option>
+              <option value="iphone">iPhone</option>
+              <option value="samsung">Samsung</option>
+            </select>
+          </div>
+          <button class="btn btn-success" id="add-product-btn">
+            Thêm sản phẩm
+          </button>
+        </section>
+
+        <section class="admin-table-section">
+          <table id="admin-product-table" class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Loại</th>
+                <th>Hình ảnh</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">PhoneShop</h3>
+            <p>Cửa hàng điện thoại uy tín, chất lượng</p>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-title">Liên kết</h3>
+            <ul class="footer-links">
+              <li><a href="../index.html">Trang chủ</a></li>
+              <li><a href="../customer/customer.html">Cửa hàng</a></li>
+              <li><a href="#">Admin</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-title">Liên hệ</h3>
+            <ul class="footer-links">
+              <li>Email: contact@phoneshop.com</li>
+              <li>Điện thoại: 0123 456 789</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 PhoneShop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Product Form Modal -->
+    <div id="product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+          <h2 id="modal-title">Thêm sản phẩm mới</h2>
+          <form id="product-form" onsubmit="saveProduct(event)">
+            <input type="hidden" id="product-id" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-name">Tên sản phẩm</label>
+                <input
+                  type="text"
+                  id="product-name"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="product-price">Giá (VND)</label>
+                <input
+                  type="number"
+                  id="product-price"
+                  class="form-control"
+                  min="0"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-type">Loại</label>
+                <select id="product-type" class="form-control" required>
+                  <option value="">Chọn loại</option>
+                  <option value="iphone">iPhone</option>
+                  <option value="samsung">Samsung</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="product-img">URL hình ảnh</label>
+                <input
+                  type="url"
+                  id="product-img"
+                  class="form-control"
+                  onchange="previewImage(this.value)"
+                />
+              </div>
+            </div>
+
+            <div class="image-preview">
+              <img id="image-preview" src="" alt="Preview" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-screen">Màn hình</label>
+                <input
+                  type="text"
+                  id="product-screen"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="product-backCamera">Camera sau</label>
+                <input
+                  type="text"
+                  id="product-backCamera"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="product-frontCamera">Camera trước</label>
+                <input
+                  type="text"
+                  id="product-frontCamera"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="product-desc">Mô tả</label>
+              <textarea
+                id="product-desc"
+                class="form-control"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="closeModal()"
+              >
+                Hủy
+              </button>
+              <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+      <div class="modal-content confirm-modal">
+        <div class="modal-body">
+          <h3 id="confirm-message">Bạn có chắc chắn muốn xóa sản phẩm này?</h3>
+          <div class="form-actions">
+            <button class="btn btn-secondary" onclick="closeConfirmModal()">
+              Hủy
+            </button>
+            <button class="btn btn-danger" id="confirm-delete">Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

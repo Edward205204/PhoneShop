@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhoneShop - Trang chính</title>
+    <link rel="stylesheet" href="asset/css/styles.css" />
+    <style>
+      .intro-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      }
+
+      .intro-title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .btn-container {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .main-btn {
+        padding: 1.5rem 3rem;
+        font-size: 1.5rem;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        min-width: 250px;
+      }
+
+      .admin-btn {
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        color: white;
+      }
+
+      .store-btn {
+        background: linear-gradient(to right, #4776e6, #8e54e9);
+        color: white;
+      }
+
+      .main-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .intro-title {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .main-btn {
+          padding: 1rem 2rem;
+          font-size: 1.2rem;
+          min-width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="intro-page">
+      <h1 class="intro-title">Chào mừng đến với PhoneShop</h1>
+      <div class="btn-container">
+        <a href="admin/admin.html" class="main-btn admin-btn">Admin Page</a>
+        <a href="customer/customer.html" class="main-btn store-btn"
+          >Store Page</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store - PhoneShop</title>
+    <link rel="stylesheet" href="../asset/css/styles.css" />
+    <style>
+      .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+        background: linear-gradient(to right, #4776e6, #8e54e9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .site-footer {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+        color: var(--light-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .product-card {
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="main-nav">
+          <a href="../index.html" class="logo">PhoneShop</a>
+          <nav>
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="customer.html" class="nav-link active">Store</a>
+            <a href="#" class="nav-link cart-link" id="cart-link">
+              Giỏ hàng (<span id="cart-count">0</span>)
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <section class="customer-toolbar">
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-name"
+              class="search-input"
+              placeholder="Tìm kiếm sản phẩm..."
+            />
+            <button class="btn btn-primary" onclick="searchProducts()">
+              Tìm
+            </button>
+          </div>
+          <div class="filter-box">
+            <select
+              id="filter-type"
+              class="filter-select"
+              onchange="filterProducts()"
+            >
+              <option value="all">Tất cả</option>
+              <option value="iphone">iPhone</option>
+              <option value="samsung">Samsung</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="products-section">
+          <div id="product-list" class="product-grid"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">PhoneShop</h3>
+            <p>Cửa hàng điện thoại uy tín, chất lượng</p>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-title">Liên kết</h3>
+            <ul class="footer-links">
+              <li><a href="../index.html">Trang chủ</a></li>
+              <li><a href="customer.html">Cửa hàng</a></li>
+              <li><a href="../admin/admin.html">Admin</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-title">Liên hệ</h3>
+            <ul class="footer-links">
+              <li>Email: contact@phoneshop.com</li>
+              <li>Điện thoại: 0123 456 789</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 PhoneShop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+          <div class="product-detail">
+            <div class="product-image">
+              <img
+                id="modal-product-image"
+                src=""
+                alt=""
+                class="detail-image"
+              />
+            </div>
+            <div class="product-info">
+              <h2 id="modal-product-name"></h2>
+              <p class="product-price" id="modal-product-price"></p>
+              <div class="specs">
+                <h3>Thông số kỹ thuật</h3>
+                <ul id="product-specs"></ul>
+              </div>
+              <p class="product-desc" id="modal-product-desc"></p>
+              <div class="product-actions">
+                <button class="btn btn-primary" id="add-to-cart-modal">
+                  Thêm vào giỏ
+                </button>
+                <button class="btn btn-secondary" id="close-modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+      <div class="cart-header">
+        <h2>Giỏ hàng</h2>
+        <span class="close-cart">&times;</span>
+      </div>
+      <div class="cart-body">
+        <table id="cart-table" class="cart-table">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Tổng</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="cart-footer">
+        <p class="cart-total">Tổng: <span id="total-price">0₫</span></p>
+        <button class="btn btn-success checkout-btn" onclick="checkout()">
+          Thanh toán
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="customer.js"></script>
+  </body>
+</html>
