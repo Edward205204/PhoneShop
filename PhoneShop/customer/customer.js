@@ -94,7 +94,6 @@ async function getProducts() {
     initEventListeners();
   } catch (error) {
     console.error("Failed to load products:", error);
-    alert("Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.");
   }
 }
 
@@ -159,7 +158,7 @@ function openModalDetails(productId) {
   if (product) openModal(product);
 }
 
-function formatCurrency(amount) {
+export function formatCurrency(amount) {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
@@ -168,6 +167,7 @@ function formatCurrency(amount) {
 
 function filterProducts() {
   const type = document.getElementById("filter-type").value;
+  console.log(type);
   const filtered =
     type === "all" ? allProducts : allProducts.filter((p) => p.type === type);
   renderProducts(filtered);
