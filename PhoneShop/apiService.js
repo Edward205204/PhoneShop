@@ -1,5 +1,10 @@
 import { API_BASE_URL } from "./constants.js";
-import axios from "axios";
+// import * as axios from "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js";
+
+// axios.default
+//   .get("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((response) => console.log(response.data))
+//   .catch((error) => console.error(error));
 
 const api = axios.create({
   baseURL: API_BASE_URL,
