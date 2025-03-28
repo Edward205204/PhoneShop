@@ -268,3 +268,4 @@ window.saveProduct = saveProduct;
 window.searchProducts = searchProducts;
 window.filterProducts = filterProducts;
 window.closeConfirmModal = closeConfirmModal;
+window.closeModal = closeModal;

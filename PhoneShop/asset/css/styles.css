@@ -59,18 +59,26 @@ body {
 .nav-link {
   color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
   transition: var(--transition);
   font-weight: 500;
+  background-color: var(--dark-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    to right,
+    rgba(71, 118, 230, 0.2),
+    rgba(142, 84, 233, 0.2)
+  );
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .nav-link.active {
   background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .cart-link {
@@ -342,8 +350,8 @@ body {
 .cart-sidebar {
   position: fixed;
   top: 0;
-  right: -400px;
-  width: 400px;
+  right: -550px;
+  width: 550px;
   height: 100%;
   background: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
@@ -392,6 +400,14 @@ body {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #eee;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-table td:first-child {
+  max-width: 200px;
 }
 
 .cart-table th {
